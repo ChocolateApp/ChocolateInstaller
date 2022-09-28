@@ -1,4 +1,4 @@
-pythonRequirement="https://raw.githubusercontent.com/Impre-visible/Chocolate/main/requirements.txt"
+pythonRequirement="https://raw.githubusercontent.com/ChocolateApp/Chocolate/main/requirements.txt"
 #check if pip3 is installed
 if ! [ -x "$(command -v pip3)" ]; then
     sudo apt-get install python3-pip
