@@ -1,8 +1,8 @@
-#read the version in the config.ini file
-version=crudini --get /etc/chocolate/config.ini ChocolateSettings version
+#read the version in the config.ini file with crudini
+version=$(sudo crudini --get /etc/chocolate/config.ini ChocolateSettings version)
 #download the example config.ini file
-wget -O /etc/chocolate/configTemp.ini https://raw.githubusercontent.com/ChocolateApp/Chocolate/main/config.ini
-latestVersion=crudini --get /etc/chocolate/configTemp.ini ChocolateSettings version
+wget -q -O /etc/chocolate/configTemp.ini https://raw.githubusercontent.com/ChocolateApp/Chocolate/main/config.ini
+latestVersion=$(sudo crudini --get /etc/chocolate/configTemp.ini ChocolateSettings version)
 #check if the version is the same
 if ! [ "$version" < "$latestVersion" ]; then
     rm /etc/chocolate/configTemp.ini
@@ -14,7 +14,7 @@ if ! [ "$version" < "$latestVersion" ]; then
         #update
         echo "Updating..."
         #download install.sh
-        wget -O /install.sh https://raw.githubusercontent.com/ChocolateApp/ChocolateInstallLinux/main/install.sh
+        wget -q -O /install.sh https://raw.githubusercontent.com/ChocolateApp/ChocolateInstallLinux/main/install.sh
         #run install.sh
         sudo bash /install.sh
 fi
