@@ -46,7 +46,7 @@ mv Chocolate /etc/chocolate
 wget -q "$linuxStart" -O /etc/chocolate/start.sh
 chmod +x /etc/chocolate/start.sh
 #set the alias
-echo "alias chocolate='python3 /etc/chocolate/start.sh'" >> ~/.bashrc
+echo "alias chocolate='sudo python3 /etc/chocolate/start.sh'" >> ~/.bashrc
 
 echo "All the settings can be changed in the config.ini file, or on the settings page in Chocolate"
 echo "Everything is set up, now you can run Chocolate with the command 'chocolate'"
