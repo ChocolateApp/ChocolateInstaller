@@ -1,8 +1,8 @@
 #read the version in the config.ini file
-version = crudini --get /etc/chocolate/config.ini ChocolateSettings version
+version=crudini --get /etc/chocolate/config.ini ChocolateSettings version
 #download the example config.ini file
 wget -O /etc/chocolate/configTemp.ini https://raw.githubusercontent.com/ChocolateApp/Chocolate/main/config.ini
-latestVersion = crudini --get /etc/chocolate/configTemp.ini ChocolateSettings version
+latestVersion=crudini --get /etc/chocolate/configTemp.ini ChocolateSettings version
 #check if the version is the same
 if ! [ "$version" < "$latestVersion" ]; then
     rm /etc/chocolate/configTemp.ini
