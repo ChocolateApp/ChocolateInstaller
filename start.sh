@@ -1,21 +1,24 @@
-#read the version in the config.ini file with crudini
-version=$(sudo crudini --get /etc/chocolate/config.ini ChocolateSettings version)
-#download the example config.ini file
-wget -q -O /etc/chocolate/configTemp.ini https://raw.githubusercontent.com/ChocolateApp/Chocolate/main/config.ini
-latestVersion=$(sudo crudini --get /etc/chocolate/configTemp.ini ChocolateSettings version)
-#check if the version is the same
-if ! [ "$version" < "$latestVersion" ]; then
-    rm /etc/chocolate/configTemp.ini
+#!/bin/bash
+
+version=$(crudini --get /etc/chocolate/config.ini ChocolateSettings version)
+curl -s -L https://raw.githubusercontent.com/ChocolateApp/Chocolate/main/config.ini > /etc/chocolate/configTemp.ini
+latestVersion=$(crudini --get /etc/chocolate/configTemp.ini ChocolateSettings version)
+version=$(echo $version | tr -d '.')
+latestVersion=$(echo $latestVersion | tr -d '.')
+version=$((version))
+latestVersion=$((latestVersion))
+if [ "$version" == "$latestVersion" ]; then
+    python3 /etc/chocolate/app.py
+    exit 0
+elif [ "$version" < "$latestVersion" ]; then
     echo "You are running an old version of Chocolate"
-    #ask if the user wants to update
     read -p "Do you want to update? [y/n] " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        #update
         echo "Updating..."
-        #download install.sh
-        wget -q -O /install.sh https://raw.githubusercontent.com/ChocolateApp/ChocolateInstallLinux/main/install.sh
-        #run install.sh
-        sudo bash /install.sh
+        wget -s -O install.sh 'https://raw.githubusercontent.com/ChocolateApp/ChocolateInstallLinux/main/install.sh'
+        bash /install.sh
+        rm install.sh
+    fi
 fi
-python3 /etc/chocolate/start.py
+exit 0
