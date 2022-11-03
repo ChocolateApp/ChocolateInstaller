@@ -1,8 +1,9 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
+#check if user in sudo group
+if [ $(id -u) -ne 0 ]; then
+    echo "Please run as root"
+    exit 1
 fi
 echo "Hi, thanks for installing Chocolate, I'm your guide for this installation."
 
@@ -44,6 +45,6 @@ chmod +x /etc/chocolate/start.sh
 
 echo "alias chocolate='/etc/chocolate/start.sh'" >> ~/.bashrc
 
-echo "Awesome, Chocolate is now ready to use!"
+echo "Awesome, Chocolate is installed to /etc/chocolate and is now ready to use!"
 echo "You can start Chocolate by typing 'chocolate' in the terminal. You can edit the settings directly on the settings page in Chocolate."
 echo "You have to add your path to the settings page, or it won't work."
