@@ -3,6 +3,7 @@
 version=$(crudini --get /etc/chocolate/config.ini ChocolateSettings version)
 curl -s -L https://raw.githubusercontent.com/ChocolateApp/Chocolate/main/config.ini > /etc/chocolate/configTemp.ini
 latestVersion=$(crudini --get /etc/chocolate/configTemp.ini ChocolateSettings version)
+rm configTemp.ini
 version=$(echo $version | tr -d '.')
 latestVersion=$(echo $latestVersion | tr -d '.')
 version=$((version))
