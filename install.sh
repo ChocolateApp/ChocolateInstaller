@@ -91,6 +91,9 @@ mv Chocolate /etc/chocolate 2>/dev/null
 wget -q "$linuxStart" -O /etc/chocolate/start.sh
 chmod +x /etc/chocolate/start.sh
 
+apt install dos2unix -y
+sudo dos2unix /etc/chocolate/start.sh
+
 echo "alias chocolate='sudo sh /etc/chocolate/start.sh'" >> ~/.bashrc
 
 echo "Awesome, Chocolate is installed to /etc/chocolate and is now ready to use!"
