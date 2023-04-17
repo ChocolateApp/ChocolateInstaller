@@ -11,7 +11,7 @@ if command -v python &>/dev/null; then
     python_version=$(python -c 'import sys; print("".join(map(str, sys.version_info[:3])))')
     python_version=$((python_version + 0))
     echo $python_version
-    if [ $(echo "$python_version >= 390" | bc -l) -eq 1]; then
+    if [ $(echo "$python_version >= 390" | bc -l) ]; then
         echo "Python 3.9 or higher is installed"
     else
         echo "Python 3.9 or higher is required. Please install it and try again."
@@ -19,7 +19,7 @@ if command -v python &>/dev/null; then
     fi
 elif command -v python3 &>/dev/null; then
     python_version=$(python3 -c 'import sys; print("".join(map(str, sys.version_info[:3])))')
-    if [ $(echo "$python_version >= 390" | bc -l) -eq 1 ]; then
+    if [ $(echo "$python_version >= 390" | bc -l) ]; then
         echo "Python 3.9 or higher is installed"
     else
         echo "Python 3.9 or higher is required. Please install it and try again."
